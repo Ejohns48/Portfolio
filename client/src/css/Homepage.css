@@ -1,0 +1,60 @@
+#main-top{
+    grid-area: maintop;
+    border: solid 1px blue;
+}
+#main-left{
+    grid-area: mainleft;
+    border: solid 1px red;
+}
+#main-bottom{
+    grid-area: mainbottom;
+    border: solid 1px green;
+}
+#main-right{
+    grid-area: mainright;
+    border: solid 1px green;
+    width: 100%;
+}
+#grid-container{
+    display: grid;
+    grid-template-columns: .25fr 1fr .75fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "mainleft maintop mainright"
+    "mainbottom mainbottom mainbottom";
+    gap: .25rem;
+    justify-content: stretch;
+    align-content: stretch;
+    margin-top: 1rem;
+    padding: 5px;
+    padding-bottom: 1rem;
+}
+#img {
+    position: absolute;
+    top: 150px;
+    right: 150px;
+    animation-name: slideLeft;
+    animation-duration: 2s;
+    transition: linear;
+    animation-timing-function: linear;
+}
+#me{
+    border-radius: 50%;
+    padding: .125rem;
+    transform-style: preserve-3d;
+}
+
+@keyframes slideLeft {
+    0%   {transform: rotate3d(1,1,1,0deg); right:150px; top:150px;}
+    10%  {transform: rotate3d(1,1,1,22.5deg); right:350px; top:150px;}
+    20%  {transform: rotate3d(1,1,1,45deg); right:550px; top:150px;}
+    30%  {transform: rotate3d(1,1,1,90deg); right:750px; top:150px;}
+    40%  {transform: rotate3d(1,1,1,135deg); right:950px; top:150px;}
+    50%  {transform: rotate3d(1,1,1,180deg); right:1050px; top:150px;}
+    60%  {transform: rotate3d(1,1,1,225deg); right:950px; top:150px;}
+    70%  {transform: rotate3d(1,1,1,270deg); right:750px; top:150px;}
+    80%  {transform: rotate3d(1,1,1,315deg); right:550px; top:150px;}
+    90%  {transform: rotate3d(1,1,1,340deg); right:350px; top:150px;}
+    100% {transform: rotate3d(1,1,1,360deg); right:150px; top:150px;}
+  }
+  
