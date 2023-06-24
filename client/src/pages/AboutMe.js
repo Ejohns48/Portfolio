@@ -1,8 +1,10 @@
 import React from 'react'
+import About from '../components/About'
+import '../css/AboutMe.css'
 
 const AboutMe = () => {
   return (
-    <div>AboutMe</div>
+    <About />
   )
 }
 

@@ -5,7 +5,7 @@ const Header = ({imgsrc, imgwidth, imgheight, alttext}) => {
 
     return (
         <header>            
-            <img id={'header-img'} src={require('../media/images/' + imgsrc)} width={imgwidth} height={imgheight} alt={alttext} />          
+            <img id={'header-img'} src={require('../assets/images/' + imgsrc)} width={imgwidth} height={imgheight} alt={alttext} />          
         </header>
 
         

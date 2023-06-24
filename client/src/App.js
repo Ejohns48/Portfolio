@@ -4,8 +4,10 @@ import HomePage from './pages/HomePage';
 import AboutMe from './pages/AboutMe';
 import ContactMe from './pages/ContactMe';
 import Portfolio from './pages/Portfolio';
+import Footer from './components/Footer';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
             <Route path="/contact" element={<ContactMe />} />
             <Route path="/portfolio" element={<Portfolio />} />      
         </Routes> 
+        <Footer />
       </Router>
     </div>
   );

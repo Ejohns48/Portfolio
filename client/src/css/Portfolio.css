@@ -1,0 +1,45 @@
+main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.project-container{
+    display: grid;
+    grid-template-areas: 
+    "left middle right"
+    "left2 middle2 right2";
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1%;
+    margin: auto;
+    margin-top: 4%;
+    width: 95%;
+    justify-content: center;
+    align-items: center;
+}
+.project-box{
+    padding-top: 5%;
+    width: 100%;
+    border: 2px solid white;    
+}
+.project-box > h2{
+    padding-bottom: 5%;
+}
+.project-box-left{
+    grid-area: left;
+}
+.project-box-middle{
+    grid-area: middle;
+}
+.project-box-right{
+    grid-area: right;    
+}
+.project-box-left2{
+    grid-area: left2;
+}
+.project-box-middle2{
+    grid-area: middle2;
+}
+.project-box-right2{
+    grid-area: right2;    
+}

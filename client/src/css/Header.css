@@ -6,33 +6,39 @@
 nav{
 display: flex;
 flex-direction: row;
-margin-right: 5rem;
+gap: 5%;
+padding-right: 5rem;
 margin-top: 2.5rem;
 text-align: center;
 }
+
 a {
 list-style: none;
+font-size: 36px;
 text-decoration: none;
 margin-left: .5rem;
 justify-content: center;
 align-items: center;
 color:#fff;
 }
-a:hover {
-max-height: 1.6rem;
-width: fit-content;
-width: auto;
-color: blue;
-font-size: 1.4rem;
-padding-right: .25rem;
-transition: .75s;
-box-shadow: 1.5px 3px 3px blue;
-text-decoration: none;
+
+@keyframes spin360 {
+    0%   {transform: rotate3d(0,1,0,0deg);}
+    10%  {transform: rotate3d(0,1,0,22.5deg);}
+    20%  {transform: rotate3d(0,1,0,45deg);}
+    30%  {transform: rotate3d(0,1,0,90deg);}
+    40%  {transform: rotate3d(0,1,0,135deg);}
+    50%  {transform: rotate3d(0,1,0,180deg);}
+    60%  {transform: rotate3d(0,1,0,225deg);}
+    70%  {transform: rotate3d(0,1,0,270deg);}
+    80%  {transform: rotate3d(0,1,0,315deg);}
+    90%  {transform: rotate3d(0,1,0,340deg);}
+    100% {transform: rotate3d(0,1,0,359deg);}
 }
 #header-img {
-    transform: rotate3d(0,1,0, 90deg);
-    transform: rotate3d(0,1,0, 180deg);
-    transform: rotate3d(0,1,0, 270deg);
-    transform: rotate3d(0,1,0, 360deg);
-    transition: 1s ease-out;  
+    animation-name: spin360;
+    animation-duration: 2s;
+    transition: linear;
+    animation-timing-function: linear; 
+    animation-iteration-count: infinite;
   }

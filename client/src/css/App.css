@@ -55,14 +55,60 @@ html {
     color: #fff;
 }
 .active {
-  text-decoration: underline blue;
+  text-decoration: underline steelblue;
+  font-size: 2rem;
+  text-shadow: 5px -5px 5px blue;
 }
 body {
     background-color: black;
     font-family: 'Arial', 'Times New Roman', Times, serif;
     text-align: center;
+	/* background-image: url(../assets/images/blue.jpg); */
+	/* background-color: rgba(0, 0, 0,1);
+	background-size: cover; */
+	background: linear-gradient(-45deg, #000, #141313,#434242, #070808, #030404);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+	color: whitesmoke;
+	text-shadow: 1px 1px 2px black;
+	overflow-x: hidden;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 .App {
   display: flex;
   flex-direction: column;
 }
+#header-container{
+	background-image: url(../assets/images/bg3.webp);
+	background-size: cover;
+	width: 100%;
+	position: sticky;
+	top: 0;
+	z-index: 5;
+}
+
+main{
+	margin-bottom: 2%;
+}
+footer{
+	background-color: rgb(6, 134, 238,0.1);
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	text-align: center;
+	font-size: large;
+}
+
