@@ -1,0 +1,114 @@
+/* || STYLE RESET || */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* || MAIN STYLES || */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+* {
+  box-sizing: border-box;
+}
+html {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    color: #fff;
+}
+.active {
+  text-decoration: underline steelblue;
+  font-size: 2rem;
+  text-shadow: 5px -5px 5px blue;
+}
+body {
+    background-color: black;
+    font-family: 'Arial', 'Times New Roman', Times, serif;
+    text-align: center;
+	/* background-image: url(../assets/images/blue.jpg); */
+	/* background-color: rgba(0, 0, 0,1);
+	background-size: cover; */
+	background: linear-gradient(-45deg, #000, #141313,#434242, #070808, #030404);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+	color: whitesmoke;
+	text-shadow: 1px 1px 2px black;
+	overflow-x: hidden;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+.App {
+  display: flex;
+  flex-direction: column;
+}
+#header-container{
+	background-image: url(../assets/images/bg3.webp);
+	background-size: cover;
+	width: 100%;
+	position: sticky;
+	top: 0;
+	z-index: 5;
+}
+
+main{
+	margin-bottom: 2%;
+}
+footer{
+	background-color: rgb(6, 134, 238,0.1);
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	text-align: center;
+	font-size: large;
+}
+

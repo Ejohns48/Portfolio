@@ -1,0 +1,44 @@
+#header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+nav{
+display: flex;
+flex-direction: row;
+gap: 5%;
+padding-right: 5rem;
+margin-top: 2.5rem;
+text-align: center;
+}
+
+a {
+list-style: none;
+font-size: 36px;
+text-decoration: none;
+margin-left: .5rem;
+justify-content: center;
+align-items: center;
+color:#fff;
+}
+
+@keyframes spin360 {
+    0%   {transform: rotate3d(0,1,0,0deg);}
+    10%  {transform: rotate3d(0,1,0,22.5deg);}
+    20%  {transform: rotate3d(0,1,0,45deg);}
+    30%  {transform: rotate3d(0,1,0,90deg);}
+    40%  {transform: rotate3d(0,1,0,135deg);}
+    50%  {transform: rotate3d(0,1,0,180deg);}
+    60%  {transform: rotate3d(0,1,0,225deg);}
+    70%  {transform: rotate3d(0,1,0,270deg);}
+    80%  {transform: rotate3d(0,1,0,315deg);}
+    90%  {transform: rotate3d(0,1,0,340deg);}
+    100% {transform: rotate3d(0,1,0,359deg);}
+}
+#header-img {
+    animation-name: spin360;
+    animation-duration: 2s;
+    transition: linear;
+    animation-timing-function: linear; 
+    animation-iteration-count: infinite;
+  }
