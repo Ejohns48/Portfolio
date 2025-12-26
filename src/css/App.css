@@ -45,7 +45,7 @@ table {
 
 /* || MAIN STYLES || */
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+/* Font is now preloaded in index.html for better performance */
 * {
   box-sizing: border-box;
 }

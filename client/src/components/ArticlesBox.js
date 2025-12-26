@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useTranslation} from 'react-i18next';
 
-const ArticlesBox = () => {
-
+const ArticlesBox = memo(() => {
     const { t } = useTranslation();
 
   return (
@@ -34,6 +33,8 @@ const ArticlesBox = () => {
           </div>
     </section>
   )
-}
+});
+
+ArticlesBox.displayName = 'ArticlesBox';
 
 export default ArticlesBox

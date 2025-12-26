@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import ej4 from '../assets/images/ej.jpg';
 import ej3 from '../assets/images/ej.jp2';
@@ -6,7 +6,7 @@ import ej2 from '../assets/images/ej.jxr';
 import ej1 from '../assets/images/ej.webp';
 import ImgNextGen from "./ImgNextGen";
 
-const InfoCard = () => {
+const InfoCard = memo(() => {
   return (
     <section id="main-left-top">
         <div id='img'>
@@ -17,8 +17,10 @@ const InfoCard = () => {
             srcJp2={ej3} 
             fallback={ej4}
             alt="Photo of Eric Johnson."
-            width="200px"
-            height="200px"
+            width="200"
+            height="200"
+            loading="eager"
+            decoding="async"
             />
           </div>
           <h1>Eric Johnson</h1><br />
@@ -26,6 +28,8 @@ const InfoCard = () => {
           <p><a id='email' href='mailto:Ejohnsmedia@Gmail.com' target='_blank' rel='noreferrer'>Ejohnsmedia@Gmail.com</a></p>          
         </section>
   )
-}
+});
+
+InfoCard.displayName = 'InfoCard';
 
 export default InfoCard

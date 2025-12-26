@@ -1,14 +1,12 @@
-import {Suspense, React} from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './css/App.css';
 import App from './App';
-import  './i18n';
+import './i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
-  
-    <Suspense fallback="Loading...">
+    <Suspense fallback={<div style={{ color: 'white', textAlign: 'center', marginTop: '50vh' }}>Loading...</div>}>
       <App />
     </Suspense>
 );

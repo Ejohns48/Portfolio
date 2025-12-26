@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const About = () => {
+const About = memo(() => {
   const { t } = useTranslation();
   return (
     <div  className='parallax'>
@@ -55,6 +55,8 @@ const About = () => {
     </div>
     
   )
-}
+});
+
+About.displayName = 'About';
 
 export default About

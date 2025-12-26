@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useTranslation} from 'react-i18next';
 
-const Introduction = () => {
-
+const Introduction = memo(() => {
     const { t } = useTranslation();
 
     return (
@@ -14,6 +13,8 @@ const Introduction = () => {
             </p>
         </section>
   )
-}
+});
+
+Introduction.displayName = 'Introduction';
 
 export default Introduction

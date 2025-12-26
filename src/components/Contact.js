@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-const Contact = () => {
+const Contact = memo(() => {
   return (
     <div>Contact</div>
   )
-}
+});
+
+Contact.displayName = 'Contact';
 
 export default Contact
