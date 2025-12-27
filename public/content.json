@@ -1,0 +1,104 @@
+{
+  "site": {
+    "title": "Eric Johnson - Portfolio",
+    "description": "Web Developer Portfolio"
+  },
+  "personal": {
+    "name": "Eric Johnson",
+    "phone": "(863) 510-3476",
+    "email": "Ejohnsmedia@Gmail.com",
+    "github": "https://github.com/Ejohns48/",
+    "linkedin": "https://www.linkedin.com/in/Ejohns48/"
+  },
+  "home": {
+    "introLines": [
+      "Welcome to my portfolio.",
+      "I'm a passionate web developer.",
+      "Let's build something great together."
+    ]
+  },
+  "articles": [
+    {
+      "id": 1,
+      "title": "Advice for Junior Developers",
+      "url": "https://dev.to/jeroendedauw/advice-for-junior-developers-30am",
+      "backgroundImage": "https://res.cloudinary.com/practicaldev/image/fetch/s--Vt_eVVRg--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://www.entropywins.wtf/blog/wp-content/uploads/2022/09/code.jpg"
+    },
+    {
+      "id": 2,
+      "title": "React Helmet Examples",
+      "url": "https://www.freecodecamp.org/news/react-helmet-examples/",
+      "backgroundImage": "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": 3,
+      "title": "9 Words of Advice for Beginners",
+      "url": "https://www.codementor.io/learn-programming/steve-klabniks-9-words-advice-programming-beginners",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2016/09/08/04/12/programmer-1653351__340.png"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Capstone Project",
+      "description": "Final project for my senior year of college.",
+      "videoSource": "../media/videos/sample.mp4",
+      "className": "project-box project-box-left"
+    },
+    {
+      "id": 2,
+      "title": "Epic Website",
+      "description": "Project for updating a mock school website.",
+      "videoSource": "../media/videos/bgmov.mp4",
+      "className": "project-box project-box-middle"
+    },
+    {
+      "id": 3,
+      "title": "Epic Website",
+      "description": "Project for updating a mock school website.",
+      "videoSource": "../media/videos/bgmov.mp4",
+      "className": "project-box project-box-right"
+    },
+    {
+      "id": 4,
+      "title": "Capstone Project",
+      "description": "Final project for my senior year of college.",
+      "videoSource": "../media/videos/sample.mp4",
+      "className": "project-box project-box-left2"
+    },
+    {
+      "id": 5,
+      "title": "Epic Website",
+      "description": "Project for updating a mock school website.",
+      "videoSource": "../media/videos/bgmov.mp4",
+      "className": "project-box project-box-middle2"
+    },
+    {
+      "id": 6,
+      "title": "Epic Website",
+      "description": "Project for updating a mock school website.",
+      "videoSource": "../media/videos/bgmov.mp4",
+      "className": "project-box project-box-right2"
+    }
+  ],
+  "about": {
+    "headerMain": "About Me",
+    "sections": [
+      {
+        "id": 1,
+        "header": "My Background",
+        "content": "I am a passionate web developer with a strong foundation in modern web technologies. I love creating beautiful, functional, and user-friendly websites."
+      },
+      {
+        "id": 2,
+        "header": "My Skills",
+        "content": "I specialize in React, JavaScript, HTML, CSS, and various modern web development tools and frameworks. I'm always eager to learn new technologies."
+      },
+      {
+        "id": 3,
+        "header": "My Goals",
+        "content": "I aim to create impactful web experiences that help businesses grow and users achieve their goals. I believe in continuous learning and improvement."
+      }
+    ]
+  }
+}
