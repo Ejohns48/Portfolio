@@ -267,10 +267,61 @@ const ArticlesEditor = ({ content, onUpdate }) => {
 
 // Projects Editor
 const ProjectsEditor = ({ content, onUpdate }) => {
+  const [uploadedFiles, setUploadedFiles] = React.useState({});
+  const [previewUrls, setPreviewUrls] = React.useState({});
+
   const handleProjectChange = (index, field, value) => {
     const newProjects = [...content];
     newProjects[index] = { ...newProjects[index], [field]: value };
     onUpdate(newProjects);
+  };
+
+  const handleFileUpload = (index, event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Create preview URL
+    const previewUrl = URL.createObjectURL(file);
+    setPreviewUrls(prev => ({ ...prev, [index]: previewUrl }));
+    setUploadedFiles(prev => ({ ...prev, [index]: file }));
+
+    // Set the video source to the expected path
+    const fileName = file.name.replace(/\s+/g, '-').toLowerCase();
+    const videoPath = `/assets/videos/${fileName}`;
+    handleProjectChange(index, 'videoSource', videoPath);
+    handleProjectChange(index, 'uploadedFileName', fileName);
+  };
+
+  const downloadFile = (index) => {
+    const file = uploadedFiles[index];
+    if (!file) return;
+
+    const url = URL.createObjectURL(file);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = file.name.replace(/\s+/g, '-').toLowerCase();
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const clearUpload = (index) => {
+    if (previewUrls[index]) {
+      URL.revokeObjectURL(previewUrls[index]);
+    }
+    setPreviewUrls(prev => {
+      const newUrls = { ...prev };
+      delete newUrls[index];
+      return newUrls;
+    });
+    setUploadedFiles(prev => {
+      const newFiles = { ...prev };
+      delete newFiles[index];
+      return newFiles;
+    });
+    handleProjectChange(index, 'videoSource', '');
+    handleProjectChange(index, 'uploadedFileName', '');
   };
 
   const addProject = () => {
@@ -285,16 +336,24 @@ const ProjectsEditor = ({ content, onUpdate }) => {
   };
 
   const removeProject = (index) => {
+    if (previewUrls[index]) {
+      URL.revokeObjectURL(previewUrls[index]);
+    }
     onUpdate(content.filter((_, i) => i !== index));
   };
 
   return (
     <div className="editor-section">
       <h2>Portfolio Projects</h2>
+      <div className="info-box">
+        <p>📁 <strong>Upload videos:</strong> Select a video file to upload. After publishing, 
+        download the file and add it to your <code>public/assets/videos/</code> folder, then redeploy.</p>
+      </div>
+      
       {(content || []).map((project, index) => (
         <div key={project.id} className="item-card">
           <div className="item-card-header">
-            <h4>Project {index + 1}</h4>
+            <h4>Project {index + 1}: {project.title}</h4>
             <button 
               className="btn-icon delete" 
               onClick={() => removeProject(index)}
@@ -303,6 +362,7 @@ const ProjectsEditor = ({ content, onUpdate }) => {
               ✕
             </button>
           </div>
+          
           <div className="form-group">
             <label>Title</label>
             <input
@@ -311,6 +371,7 @@ const ProjectsEditor = ({ content, onUpdate }) => {
               onChange={(e) => handleProjectChange(index, 'title', e.target.value)}
             />
           </div>
+          
           <div className="form-group">
             <label>Description</label>
             <textarea
@@ -318,16 +379,110 @@ const ProjectsEditor = ({ content, onUpdate }) => {
               onChange={(e) => handleProjectChange(index, 'description', e.target.value)}
             />
           </div>
+          
           <div className="form-group">
-            <label>Video Source URL</label>
-            <input
-              type="text"
-              value={project.videoSource || ''}
-              onChange={(e) => handleProjectChange(index, 'videoSource', e.target.value)}
-            />
+            <label>Video/Media Source</label>
+            <div className="file-upload-container">
+              <input
+                type="text"
+                value={project.videoSource || ''}
+                onChange={(e) => handleProjectChange(index, 'videoSource', e.target.value)}
+                placeholder="Enter URL or upload a file..."
+                className="file-path-input"
+              />
+              
+              <label className="file-upload-btn">
+                📤 Upload File
+                <input
+                  type="file"
+                  accept="video/*,image/*"
+                  onChange={(e) => handleFileUpload(index, e)}
+                  style={{ display: 'none' }}
+                />
+              </label>
+            </div>
+            
+            {/* Preview Section */}
+            {(previewUrls[index] || project.videoSource) && (
+              <div className="media-preview">
+                <div className="preview-header">
+                  <span>Preview</span>
+                  {uploadedFiles[index] && (
+                    <div className="preview-actions">
+                      <button 
+                        className="btn-small success"
+                        onClick={() => downloadFile(index)}
+                        title="Download file to add to your project"
+                      >
+                        📥 Download
+                      </button>
+                      <button 
+                        className="btn-small danger"
+                        onClick={() => clearUpload(index)}
+                        title="Clear upload"
+                      >
+                        ✕ Clear
+                      </button>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="preview-content">
+                  {(previewUrls[index] || project.videoSource)?.match(/\.(mp4|webm|ogg|mov)$/i) || 
+                   uploadedFiles[index]?.type?.startsWith('video/') ? (
+                    <video 
+                      src={previewUrls[index] || project.videoSource} 
+                      controls 
+                      muted
+                      style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '8px' }}
+                    >
+                      Your browser does not support video.
+                    </video>
+                  ) : (previewUrls[index] || project.videoSource)?.match(/\.(jpg|jpeg|png|gif|webp)$/i) ||
+                       uploadedFiles[index]?.type?.startsWith('image/') ? (
+                    <img 
+                      src={previewUrls[index] || project.videoSource} 
+                      alt="Preview"
+                      style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '8px' }}
+                    />
+                  ) : (
+                    <p className="preview-placeholder">
+                      📹 Video will display here when loaded
+                    </p>
+                  )}
+                </div>
+                
+                {uploadedFiles[index] && (
+                  <div className="upload-info">
+                    <span className="file-name">📁 {uploadedFiles[index].name}</span>
+                    <span className="file-size">
+                      ({(uploadedFiles[index].size / (1024 * 1024)).toFixed(2)} MB)
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+          
+          <div className="form-group">
+            <label>Layout Class (optional)</label>
+            <select
+              value={project.className || 'project-box'}
+              onChange={(e) => handleProjectChange(index, 'className', e.target.value)}
+              className="form-select"
+            >
+              <option value="project-box">Default</option>
+              <option value="project-box project-box-left">Left</option>
+              <option value="project-box project-box-middle">Middle</option>
+              <option value="project-box project-box-right">Right</option>
+              <option value="project-box project-box-left2">Left Row 2</option>
+              <option value="project-box project-box-middle2">Middle Row 2</option>
+              <option value="project-box project-box-right2">Right Row 2</option>
+            </select>
           </div>
         </div>
       ))}
+      
       <button className="add-item-btn" onClick={addProject}>
         + Add Project
       </button>
