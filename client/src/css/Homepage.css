@@ -172,6 +172,198 @@ em i {
 }
 
 
+/* ============================================
+   DESKTOP BREAKPOINTS (Large Screens)
+   ============================================ */
+
+/* Standard Desktop (1200px+) */
+@media screen and (min-width: 1200px) {
+    #grid-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    #intro {
+        font-size: 44px;
+        padding: 3.5rem 2rem;
+    }
+    
+    #main-left-top {
+        padding: 2.5rem;
+    }
+    
+    #main-right {
+        width: 55%;
+    }
+    
+    .card-box {
+        height: 9rem;
+    }
+    
+    .card-box-container {
+        width: 80%;
+    }
+}
+
+/* Large Desktop (1440px+) */
+@media screen and (min-width: 1440px) {
+    #grid-container {
+        max-width: 1600px;
+        grid-template-columns: 0.08fr 0.18fr 1.2fr 0.6fr;
+        gap: 1rem;
+    }
+    
+    #intro {
+        font-size: 48px;
+        padding: 4rem 2.5rem;
+    }
+    
+    #main-left-top {
+        padding: 3rem;
+    }
+    
+    #main-left-top h1 {
+        font-size: 1.75rem;
+    }
+    
+    #main-right {
+        width: 60%;
+        padding: 1.5rem;
+    }
+    
+    #card-box-header {
+        font-size: 52px;
+    }
+    
+    .card-box {
+        height: 10rem;
+    }
+    
+    .card-box-title {
+        font-size: 1.25rem;
+    }
+    
+    #socials > a > img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Extra Large Desktop (1920px+) */
+@media screen and (min-width: 1920px) {
+    #grid-container {
+        max-width: 1800px;
+        gap: 1.5rem;
+    }
+    
+    #intro {
+        font-size: 54px;
+        padding: 4.5rem 3rem;
+        border-radius: 1%;
+    }
+    
+    #main-top {
+        margin-top: 6rem;
+    }
+    
+    #main-left-top {
+        margin-top: 6rem;
+        padding: 3.5rem;
+    }
+    
+    #main-left-top h1 {
+        font-size: 2rem;
+    }
+    
+    #main-right {
+        width: 65%;
+        padding: 2rem;
+        margin-right: 3rem;
+    }
+    
+    #cardboxheadercontainer {
+        height: 120px;
+    }
+    
+    #card-box-header {
+        font-size: 58px;
+    }
+    
+    .card-box {
+        height: 11rem;
+    }
+    
+    .card-box-container {
+        margin-bottom: 1.5rem;
+    }
+    
+    #socials {
+        margin-top: 5rem;
+    }
+    
+    #socials > a > img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Ultra-wide monitors (2560px+) */
+@media screen and (min-width: 2560px) {
+    #grid-container {
+        max-width: 2200px;
+        gap: 2rem;
+    }
+    
+    #intro {
+        font-size: 60px;
+        padding: 5rem 4rem;
+    }
+    
+    #main-top {
+        margin-top: 7rem;
+    }
+    
+    #main-left-top {
+        margin-top: 7rem;
+        padding: 4rem;
+    }
+    
+    #main-left-top h1 {
+        font-size: 2.25rem;
+    }
+    
+    #main-right {
+        width: 55%;
+        padding: 2.5rem;
+    }
+    
+    #cardboxheadercontainer {
+        height: 140px;
+    }
+    
+    #card-box-header {
+        font-size: 64px;
+    }
+    
+    .card-box {
+        height: 13rem;
+    }
+    
+    .card-box-title {
+        font-size: 1.5rem;
+    }
+    
+    #socials > a > img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* ============================================
+   INTERACTION QUERIES
+   ============================================ */
+
 /* MEDIA QUERIES */
 @media (hover: hover) and (pointer: fine) {
     nav > a:hover {

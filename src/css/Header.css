@@ -61,6 +61,98 @@ a:active {
     height: auto;
 }
 
+/* ============================================
+   DESKTOP BREAKPOINTS (Large Screens)
+   ============================================ */
+
+/* Standard Desktop (1200px+) */
+@media screen and (min-width: 1200px) {
+    #header-container {
+        padding: 0.75rem 2rem;
+    }
+    
+    nav {
+        gap: 1.5rem;
+        padding-right: 3rem;
+    }
+    
+    a {
+        font-size: 1.75rem;
+        padding: 0.75rem;
+    }
+    
+    #header-img {
+        max-width: 160px;
+    }
+}
+
+/* Large Desktop (1440px+) */
+@media screen and (min-width: 1440px) {
+    #header-container {
+        padding: 1rem 3rem;
+    }
+    
+    nav {
+        gap: 2rem;
+        padding-right: 4rem;
+    }
+    
+    a {
+        font-size: 2rem;
+        padding: 0.85rem;
+    }
+    
+    #header-img {
+        max-width: 180px;
+    }
+}
+
+/* Extra Large Desktop (1920px+) */
+@media screen and (min-width: 1920px) {
+    #header-container {
+        padding: 1.25rem 4rem;
+    }
+    
+    nav {
+        gap: 2.5rem;
+        padding-right: 5rem;
+    }
+    
+    a {
+        font-size: 2.25rem;
+        padding: 1rem;
+    }
+    
+    #header-img {
+        max-width: 200px;
+    }
+}
+
+/* Ultra-wide monitors (2560px+) */
+@media screen and (min-width: 2560px) {
+    #header-container {
+        padding: 1.5rem 5rem;
+    }
+    
+    nav {
+        gap: 3rem;
+        padding-right: 6rem;
+    }
+    
+    a {
+        font-size: 2.5rem;
+        padding: 1.25rem;
+    }
+    
+    #header-img {
+        max-width: 220px;
+    }
+}
+
+/* ============================================
+   TABLET & MOBILE BREAKPOINTS
+   ============================================ */
+
 /* Tablet breakpoint */
 @media screen and (max-width: 1024px) {
     #header-container {

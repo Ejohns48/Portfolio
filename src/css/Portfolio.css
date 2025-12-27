@@ -73,6 +73,118 @@ main {
     grid-area: right2;    
 }
 
+/* ============================================
+   DESKTOP BREAKPOINTS (Large Screens)
+   ============================================ */
+
+/* Standard Desktop (1200px+) */
+@media screen and (min-width: 1200px) {
+    .project-container {
+        max-width: 1400px;
+        width: 90%;
+        grid-gap: 1.5%;
+    }
+    
+    .project-box {
+        padding: 3% 2%;
+    }
+    
+    .project-box > h2 {
+        font-size: 1.4rem;
+    }
+    
+    .project-box > p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    .project-box video {
+        max-width: 400px;
+    }
+}
+
+/* Large Desktop (1440px+) */
+@media screen and (min-width: 1440px) {
+    .project-container {
+        max-width: 1600px;
+        width: 85%;
+        grid-gap: 2%;
+    }
+    
+    .project-box {
+        padding: 2.5% 2%;
+        border-radius: 12px;
+    }
+    
+    .project-box > h2 {
+        font-size: 1.5rem;
+        padding-bottom: 4%;
+    }
+    
+    .project-box > p {
+        font-size: 1.1rem;
+        padding: 0.75rem;
+    }
+    
+    .project-box video {
+        max-width: 450px;
+        border-radius: 8px;
+    }
+}
+
+/* Extra Large Desktop (1920px+) */
+@media screen and (min-width: 1920px) {
+    .project-container {
+        max-width: 1800px;
+        margin-top: 5%;
+    }
+    
+    .project-box {
+        padding: 2% 2%;
+    }
+    
+    .project-box > h2 {
+        font-size: 1.75rem;
+    }
+    
+    .project-box > p {
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+    
+    .project-box video {
+        max-width: 500px;
+    }
+}
+
+/* Ultra-wide monitors (2560px+) */
+@media screen and (min-width: 2560px) {
+    .project-container {
+        max-width: 2200px;
+    }
+    
+    .project-box {
+        border-radius: 16px;
+    }
+    
+    .project-box > h2 {
+        font-size: 2rem;
+    }
+    
+    .project-box > p {
+        font-size: 1.3rem;
+    }
+    
+    .project-box video {
+        max-width: 600px;
+        border-radius: 12px;
+    }
+}
+
+/* ============================================
+   TABLET & MOBILE BREAKPOINTS
+   ============================================ */
+
 /* Tablet breakpoint - 2 columns */
 @media screen and (max-width: 1024px) {
     .project-container {

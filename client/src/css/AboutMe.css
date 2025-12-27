@@ -75,6 +75,122 @@ p {
     padding: 50px 1rem;
 }
 
+/* ============================================
+   DESKTOP BREAKPOINTS (Large Screens)
+   ============================================ */
+
+/* Standard Desktop (1200px+) */
+@media screen and (min-width: 1200px) {
+    .parallax-layer section {
+        max-width: 1000px;
+    }
+    
+    .about-header {
+        width: 70%;
+    }
+    
+    .parallax-layer {
+        padding: 0 3rem;
+    }
+    
+    .div1, .div2, .div3 {
+        padding: 4% 2rem;
+    }
+}
+
+/* Large Desktop (1440px+) */
+@media screen and (min-width: 1440px) {
+    .parallax-layer section {
+        max-width: 1100px;
+    }
+    
+    .about-header {
+        width: 60%;
+        margin-top: 4%;
+    }
+    
+    h2 {
+        font-size: 2.25rem;
+    }
+    
+    p {
+        font-size: 1.3rem;
+        line-height: 1.7;
+    }
+    
+    .div1 {
+        margin-top: 6%;
+        padding: 5% 3rem;
+    }
+    
+    .div2 {
+        margin-top: 8%;
+        padding: 5% 3rem;
+    }
+    
+    .div3 {
+        padding: 5% 3rem;
+    }
+}
+
+/* Extra Large Desktop (1920px+) */
+@media screen and (min-width: 1920px) {
+    .parallax-layer section {
+        max-width: 1300px;
+    }
+    
+    .about-header {
+        width: 55%;
+        font-size: 5rem;
+    }
+    
+    h2 {
+        font-size: 2.5rem;
+    }
+    
+    p {
+        font-size: 1.4rem;
+        line-height: 1.8;
+    }
+    
+    .parallax-layer {
+        padding: 0 4rem;
+    }
+    
+    .div1, .div2, .div3 {
+        min-height: 55vh;
+        padding: 5% 4rem;
+    }
+}
+
+/* Ultra-wide monitors (2560px+) */
+@media screen and (min-width: 2560px) {
+    .parallax-layer section {
+        max-width: 1500px;
+    }
+    
+    .about-header {
+        width: 50%;
+        font-size: 5.5rem;
+    }
+    
+    h2 {
+        font-size: 2.75rem;
+    }
+    
+    p {
+        font-size: 1.5rem;
+    }
+    
+    .div1, .div2, .div3 {
+        min-height: 60vh;
+    }
+}
+
+/* ============================================
+   TABLET & MOBILE BREAKPOINTS
+   ============================================ */
+
 /* Tablet breakpoint */
 @media screen and (max-width: 1024px) {
     .about-header {
