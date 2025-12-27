@@ -1,13 +1,79 @@
 import React, { useState, memo } from 'react';
 import { useCMS } from '../context/CMSContext';
+import { uploadAPI } from '../services/api';
 import '../css/Admin.css';
+
+// Login Form Component
+const LoginForm = ({ onLogin, error }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    await onLogin(email, password);
+    setIsSubmitting(false);
+  };
+
+  return (
+    <div className="admin-container login-container">
+      <div className="login-box">
+        <h1>🔐 Admin Login</h1>
+        <p>Sign in to manage your portfolio content</p>
+        
+        {error && <div className="error-message">{error}</div>}
+        
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@example.com"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+            />
+          </div>
+          <button 
+            type="submit" 
+            className="admin-btn success full-width"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Signing in...' : '🚀 Sign In'}
+          </button>
+        </form>
+        
+        <div className="login-hint">
+          <p>💡 <strong>Static Mode:</strong> If you don't have a backend configured, 
+          the CMS will work in export mode.</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Admin = memo(() => {
   const { 
     content, 
     isLoading, 
     error, 
-    isDraft, 
+    isDraft,
+    isAuthenticated,
+    user,
+    useAPI,
+    login,
+    logout,
     updateSection,
     discardDraft, 
     exportContent,
@@ -15,6 +81,25 @@ const Admin = memo(() => {
   } = useCMS();
   
   const [activeTab, setActiveTab] = useState('personal');
+  const [loginError, setLoginError] = useState('');
+  const [publishStatus, setPublishStatus] = useState(null);
+
+  // Handle login
+  const handleLogin = async (email, password) => {
+    try {
+      setLoginError('');
+      await login(email, password);
+    } catch (err) {
+      setLoginError(err.message || 'Login failed');
+    }
+  };
+
+  // Handle publish with status
+  const handlePublish = async () => {
+    const result = await publishContent();
+    setPublishStatus(result);
+    setTimeout(() => setPublishStatus(null), 5000);
+  };
 
   if (isLoading) {
     return <div className="admin-loading">Loading CMS...</div>;
@@ -22,6 +107,11 @@ const Admin = memo(() => {
 
   if (error) {
     return <div className="admin-loading">Error: {error}</div>;
+  }
+
+  // Show login form if API is enabled but not authenticated
+  if (useAPI && !isAuthenticated) {
+    return <LoginForm onLogin={handleLogin} error={loginError} />;
   }
 
   if (!content) {
@@ -39,9 +129,22 @@ const Admin = memo(() => {
   return (
     <div className="admin-container">
       <header className="admin-header">
-        <h1>📝 Content Management System</h1>
+        <div className="header-left">
+          <h1>📝 Content Management System</h1>
+          {user && (
+            <span className="user-badge">👤 {user.name || user.email}</span>
+          )}
+          {!useAPI && (
+            <span className="mode-badge static">📁 Static Mode</span>
+          )}
+        </div>
         <div className="admin-status">
           {isDraft && <span className="draft-badge">Unsaved Draft</span>}
+          {publishStatus && (
+            <span className={`publish-status ${publishStatus.success ? 'success' : 'error'}`}>
+              {publishStatus.message}
+            </span>
+          )}
           <div className="admin-actions">
             <button className="admin-btn secondary" onClick={exportContent}>
               📥 Export JSON
@@ -51,9 +154,14 @@ const Admin = memo(() => {
                 🗑️ Discard Draft
               </button>
             )}
-            <button className="admin-btn success" onClick={publishContent}>
+            <button className="admin-btn success" onClick={handlePublish}>
               🚀 Publish
             </button>
+            {useAPI && isAuthenticated && (
+              <button className="admin-btn secondary" onClick={logout}>
+                🚪 Logout
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -81,7 +189,7 @@ const Admin = memo(() => {
           <ArticlesEditor content={content.articles} onUpdate={(data) => updateSection('articles', data)} />
         )}
         {activeTab === 'projects' && (
-          <ProjectsEditor content={content.projects} onUpdate={(data) => updateSection('projects', data)} />
+          <ProjectsEditor content={content.projects} onUpdate={(data) => updateSection('projects', data)} useAPI={useAPI} />
         )}
         {activeTab === 'about' && (
           <AboutEditor content={content.about} onUpdate={(data) => updateSection('about', data)} />
@@ -266,9 +374,10 @@ const ArticlesEditor = ({ content, onUpdate }) => {
 };
 
 // Projects Editor
-const ProjectsEditor = ({ content, onUpdate }) => {
+const ProjectsEditor = ({ content, onUpdate, useAPI }) => {
   const [uploadedFiles, setUploadedFiles] = React.useState({});
   const [previewUrls, setPreviewUrls] = React.useState({});
+  const [uploadStatus, setUploadStatus] = React.useState({});
 
   const handleProjectChange = (index, field, value) => {
     const newProjects = [...content];
@@ -276,7 +385,7 @@ const ProjectsEditor = ({ content, onUpdate }) => {
     onUpdate(newProjects);
   };
 
-  const handleFileUpload = (index, event) => {
+  const handleFileUpload = async (index, event) => {
     const file = event.target.files[0];
     if (!file) return;
 
@@ -285,11 +394,29 @@ const ProjectsEditor = ({ content, onUpdate }) => {
     setPreviewUrls(prev => ({ ...prev, [index]: previewUrl }));
     setUploadedFiles(prev => ({ ...prev, [index]: file }));
 
-    // Set the video source to the expected path
-    const fileName = file.name.replace(/\s+/g, '-').toLowerCase();
-    const videoPath = `/assets/videos/${fileName}`;
-    handleProjectChange(index, 'videoSource', videoPath);
-    handleProjectChange(index, 'uploadedFileName', fileName);
+    // If API is available, upload to server
+    if (useAPI) {
+      try {
+        setUploadStatus(prev => ({ ...prev, [index]: 'uploading' }));
+        const response = await uploadAPI.upload(file);
+        if (response.success) {
+          handleProjectChange(index, 'videoSource', response.data.url);
+          setUploadStatus(prev => ({ ...prev, [index]: 'success' }));
+        }
+      } catch (err) {
+        console.error('Upload failed:', err);
+        setUploadStatus(prev => ({ ...prev, [index]: 'error' }));
+        // Fallback to local path
+        const fileName = file.name.replace(/\s+/g, '-').toLowerCase();
+        handleProjectChange(index, 'videoSource', `/assets/videos/${fileName}`);
+      }
+    } else {
+      // Set the video source to the expected path (static mode)
+      const fileName = file.name.replace(/\s+/g, '-').toLowerCase();
+      const videoPath = `/assets/videos/${fileName}`;
+      handleProjectChange(index, 'videoSource', videoPath);
+      handleProjectChange(index, 'uploadedFileName', fileName);
+    }
   };
 
   const downloadFile = (index) => {
@@ -458,6 +585,13 @@ const ProjectsEditor = ({ content, onUpdate }) => {
                     <span className="file-size">
                       ({(uploadedFiles[index].size / (1024 * 1024)).toFixed(2)} MB)
                     </span>
+                    {uploadStatus[index] && (
+                      <span className={`upload-status ${uploadStatus[index]}`}>
+                        {uploadStatus[index] === 'uploading' && '⏳ Uploading...'}
+                        {uploadStatus[index] === 'success' && '✅ Uploaded'}
+                        {uploadStatus[index] === 'error' && '❌ Upload failed'}
+                      </span>
+                    )}
                   </div>
                 )}
               </div>
