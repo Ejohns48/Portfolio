@@ -6,14 +6,14 @@ const Project = memo(({ title, description, mp4Source, className }) => {
           <div className={className}>
             <h2>{title}</h2>
             <video 
-              width="360" 
-              height="240" 
+              className="project-video"
               controls={true} 
               playsInline={true} 
               muted={true}
               preload="none"
-              loading="lazy"
               poster=""
+              // Responsive video - width/height handled by CSS
+              style={{ width: '100%', maxWidth: '360px', height: 'auto' }}
             >
               <source src={mp4Source} type="video/mp4" />
               Your browser does not support the video tag.
