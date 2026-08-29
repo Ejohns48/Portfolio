@@ -1,15 +1,45 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useCMS } from '../context/CMSContext';
 
-const About = () => {
+const About = memo(() => {
   const { t } = useTranslation();
+  const { content } = useCMS();
+
+  // Use CMS content if available
+  const aboutContent = content?.about;
+  const useCMSContent = aboutContent && aboutContent.sections && aboutContent.sections.length > 0;
+
+  // CSS classes for sections
+  const sectionClasses = ['div1', 'div2', 'div3'];
+
+  if (useCMSContent) {
+    return (
+      <div className='parallax'>
+        <div className="about-header">
+          <h1>{aboutContent.headerMain || t('aboutHeaderMain')}</h1>
+        </div>
+        
+        {aboutContent.sections.map((section, index) => (
+          <div key={section.id} className={`parallax-layer ${sectionClasses[index % sectionClasses.length]}`}>
+            <section>
+              <h2>{section.header}</h2>
+              <p>{section.content}</p>
+            </section>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Fallback to i18n translations
   return (
-    <div  className='parallax'>
+    <div className='parallax'>
       <div className="about-header">
         <h1>{t('aboutHeaderMain')}</h1>
       </div>
       
-      <div className='parallax-layer div1' >
+      <div className='parallax-layer div1'>
         <section>
           <h2>{t('aboutHeaderOne')}</h2> 
           <p>
@@ -21,7 +51,7 @@ const About = () => {
           </p>
         </section>
       </div>   
-      <div  className='parallax-layer div2'>
+      <div className='parallax-layer div2'>
         <section>
           <h2>{t('aboutHeaderTwo')}</h2>
           <p>
@@ -38,9 +68,8 @@ const About = () => {
           {t('about211')}
           </p>
         </section>
-        
       </div>
-      <div  className='parallax-layer div3'>
+      <div className='parallax-layer div3'>
         <section>
           <h2>{t('aboutHeaderThree')}</h2>
           <p>
@@ -53,8 +82,9 @@ const About = () => {
         </section>
       </div>
     </div>
-    
   )
-}
+});
+
+About.displayName = 'About';
 
 export default About

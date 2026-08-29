@@ -1,12 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 
 import InfoCard from "./InfoCard";
 import Socials from "./Socials";
 import ArticlesBox from "./ArticlesBox";
 import Introduction from "./Introduction";
 
-const Home = () => {
-
+const Home = memo(() => {
   return (
     <main>
       <section id="grid-container">
@@ -17,6 +16,8 @@ const Home = () => {
       </section>
     </main>
   );
-};
+});
+
+Home.displayName = 'Home';
 
 export default Home;
